@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block heading %}Results{% endblock %}
+
+{% block body %}
+    <form action="{{ url_for('calc') }}" method="post">
+        <input type="text" name="ip" placeholder="IP Address">
+        <input type="text" name="mask" placeholder="CIDR or Mask">
+        <br><button>Calculate!</button>
+    </form>
+
+    <p>IP Address: {{ ".".join(ip) }}</p>
+    <p>Subnet Mask: {{ ".".join(mask) }}</p>
+{% endblock %}

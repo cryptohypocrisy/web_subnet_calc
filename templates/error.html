@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block heading %}Subnet Calculator{% endblock %}
+
+{% block body %}
+    <form action={{ url_for('calc') }} method="post">
+        {% if not ip %}
+            <input type="text" name="ip" placeholder="Invalid IP!" style="background-color: red; color: white;">
+            <input type="text" name="mask" placeholder="CIDR or Mask" value="{{ ".".join(mask) }}">
+        {% endif %}
+        {% if not mask %}
+            <input type="text" name="ip" placeholder="IP Address" value="{{ ".".join(ip) }}">
+            <input type="text" name="mask" placeholder="Invalid Mask!" style="background-color: red; color: white;">
+        {% endif %}
+        <br><button>Calculate!</button>
+    </form>
+{% endblock %}

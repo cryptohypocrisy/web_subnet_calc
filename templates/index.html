@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+
+{% block heading %}Subnet Calculator{% endblock %}
+
+{% block body %}
+    <form action="{{ url_for('calc') }}" method="post">
+        <input type="text" name="ip" placeholder="IP Address">
+        <input type="text" name="mask" placeholder="CIDR or Mask">
+        <br><button>Calculate!</button>
+    </form>
+{% endblock %}
