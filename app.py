@@ -8,20 +8,10 @@ network = Network()
 
 app = Flask(__name__)
 
-@app.route("/")
+@app.route("/", methods=["POST", "GET"])
 def index():
-    return render_template("index.html")
-
-@app.route("/calc", methods=["POST"])
-def calc():
-    ip = request.form.get("ip")
-    mask = request.form.get("mask")
-    network.ip = v.check_ip(ip)
-    network.mask, network.cidr = v.check_mask(mask)
-    ip2 = network.ip
-    mask2, cidr2 = network.mask, network.cidr
-    if not network.ip or not network.mask:
-        return render_template("error.html",
-                                ip=ip2,
-                                mask=mask2)
-    return render_template("calc.html", ip=ip2, mask=mask2)
+    network.ip, network.mask = [], []
+    if request.method == "POST":
+            network.ip = v.check_ip(request.form.get("ip"))
+            network.mask, network.cidr = v.check_mask(request.form.get("mask"))
+    return render_template("index.html", network=network)
