@@ -3,28 +3,31 @@
 {% block heading %}Subnet Calculator{% endblock %}
 
 {% block body %}
-    <form action="{{ url_for('index') }}" method="post">
-    {% if network.ip and network.mask or network.ip == [] %}
-            <input type="text" name="ip" placeholder="IP Address">
-            <input type="text" name="mask" placeholder="CIDR or Mask">
-    {% endif %}
+    <div id="calc">
+        <form action="{{ url_for('index') }}" method="post">
+        {% if network.ip and network.mask or network.ip == [] %}
+                <input type="text" name="ip" placeholder="IP Address">
+                <input type="text" name="mask" placeholder="CIDR or Mask">
+        {% endif %}
 
-    {% if network.ip == False %}
-        <input type="text" name="ip" placeholder="Invalid IP!" style="background-color: pink;">
-        <input type="text" name="mask" value="{{ ".".join(network.mask) }}">
-    {% endif %}
+        {% if network.ip == False %}
+            <input type="text" name="ip" placeholder="Invalid IP!" style="background-color: pink;">
+            <input type="text" name="mask" value="{{ ".".join(network.mask) }}">
+        {% endif %}
 
-    {% if network.mask == False %}
-        <input type="text" name="ip" value="{{ ".".join(network.ip) }}">
-        <input type="text" name="mask" placeholder="Invalid Mask!" style="background-color: pink">
-    {% endif %}
+        {% if network.mask == False %}
+            <input type="text" name="ip" value="{{ ".".join(network.ip) }}">
+            <input type="text" name="mask" placeholder="Invalid Mask!" style="background-color: pink">
+        {% endif %}
 
-    <br><button>Calculate!</button>
-    </form>
-
-    {% if network.ip and network.mask %}
-        IP Address: {{ ".".join(network.ip) }}
-        <br>Subnet Mask: {{ ".".join(network.mask) }}
-        <br>Wildcard: {{ ".".join(network.get_wildcard()) }}
-    {% endif %}
+        <button>Calculate!</button>
+        </form>
+        <div id="output">
+            {% if network.ip and network.mask %}
+                IP Address: {{ ".".join(network.ip) }}
+                <br>Subnet Mask: {{ ".".join(network.mask) }}
+                <br>Wildcard: {{ ".".join(network.get_wildcard()) }}
+            {% endif %}
+        </div>
+    </div>
 {% endblock %}
