@@ -7,15 +7,16 @@ from network import Network
 
 # network = Network()
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/static')
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
+app.send_static_file("index.html")
 Session(app)
 
 @app.route("/", methods=["POST", "GET"])
 def index():
-#    if not session.get("network"):
-#        session["network"] =  Network()
+    if not session.get("network"):
+        session["network"] =  Network()
     session["network"].ip, session["network"].mask = [], []
     if request.method == "POST":
             session["network"].ip = v.check_ip(request.form.get("ip"))
