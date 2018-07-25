@@ -10,7 +10,6 @@ from network import Network
 app = Flask(__name__, static_url_path='/static')
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
-app.send_static_file("index.html")
 Session(app)
 
 @app.route("/", methods=["POST", "GET"])
@@ -19,6 +18,10 @@ def index():
         session["network"] =  Network()
     session["network"].ip, session["network"].mask = [], []
     if request.method == "POST":
+        try:
             session["network"].ip = v.check_ip(request.form.get("ip"))
             session["network"].mask, session["network"].cidr = v.check_mask(request.form.get("mask"))
+        except TypeError:
+            session["network"].ip = False
+            session["network"].mask, session["network"].cidr = False, False
     return render_template("index.html", network=session["network"])

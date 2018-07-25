@@ -1,26 +1,29 @@
 {% extends "layout.html" %}
 
-{% block heading %}Subnet Calculator <img src="/static/cat.jpg, alt=""></img>"{% endblock %}
+{% block heading %}Subnet Calculator {% endblock %}
 
 {% block body %}
-    <div id="calc">
+    <div style="margin: auto; width: 40%; text-align: center;">
         <form action="{{ url_for('index') }}" method="post">
         {% if network.ip and network.mask or network.ip == [] %}
-                <input type="text" name="ip" placeholder="IP Address">
-                <input type="text" name="mask" placeholder="CIDR or Mask">
+            <div class="form-group">
+                <input class="form-control" style="margin-bottom: 5px;" type="text" name="ip" placeholder="IP Address">
+                <input class="form-control" type="text" name="mask" placeholder="CIDR or Mask">
+        {% elif network.ip == False and network.mask %}
+            <input class="form-control" style="margin-bottom: 5px; background-color: pink;"; type="text" name="ip" placeholder="Invalid IP!">
+            <input class="form-control" type="text" name="mask" value="{{ ".".join(network.mask) }}">
+        {% elif network.mask == False and network.ip %}
+            <input class="form-control" style="margin-bottom: 5px;" type="text" name="ip" value="{{ ".".join(network.ip) }}">
+            <input class="form-control" type="text" name="mask" placeholder="Invalid Mask!" style="background-color: pink">
+        {% else %}
+            <input class="form-control" style="margin-bottom: 5px; background-color: pink;"; type="text" name="ip" placeholder="Invalid IP!">
+            <input class="form-control" type="text" name="mask" placeholder="Invalid Mask!" style="background-color: pink">
         {% endif %}
 
-        {% if network.ip == False %}
-            <input type="text" name="ip" placeholder="Invalid IP!" style="background-color: pink;">
-            <input type="text" name="mask" value="{{ ".".join(network.mask) }}">
-        {% endif %}
+        <button class="form-control" style="margin-top: 5px;">Calculate!</button>
+            </div>
 
-        {% if network.mask == False %}
-            <input type="text" name="ip" value="{{ ".".join(network.ip) }}">
-            <input type="text" name="mask" placeholder="Invalid Mask!" style="background-color: pink">
-        {% endif %}
 
-        <button>Calculate!</button>
         </form>
         <div id="output">
             {% if network.ip and network.mask %}
