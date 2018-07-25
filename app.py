@@ -14,9 +14,11 @@ Session(app)
 
 @app.route("/", methods=["POST", "GET"])
 def index():
+
     if not session.get("network"):
         session["network"] =  Network()
     session["network"].ip, session["network"].mask = [], []
+
     if request.method == "POST":
         try:
             session["network"].ip = v.check_ip(request.form.get("ip"))
@@ -24,4 +26,5 @@ def index():
         except TypeError:
             session["network"].ip = False
             session["network"].mask, session["network"].cidr = False, False
+
     return render_template("index.html", network=session["network"])

@@ -4,10 +4,22 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <meta name="viewport" content="width=screen-width, initial-size=1.0">
         <title>Subnet Calculator</title>
-        <!--<style>
+        <style>
             body {
                 background-color: rgb(30, 111, 178);
             }
+            #output {
+                font-family: arial, sans-serif;
+                font-size: 20px;
+                color: white;
+                text-align: left;
+                padding: 25px;
+            }
+            .variable {
+                color: black;
+            }
+        </style>
+<!--
             h1 {
                 font-family: arial, sans-serif;
                 font-size: 48px;
@@ -25,24 +37,18 @@
                 text-align: center;
                 border-radius: 5px;
             }
-            #output {
-                font-family: arial, sans-serif;
-                font-size: 18px;
-                color: white;
-                text-align: left;
-                padding: 25px;
-            }
+
             input {
                 border-radius: 2px;
                 margin:5px;
                 margin-top: 15px;
                 width: 40%;
             }
-        </style>
-    -->
+-->
+
     </head>
     <body>
-        <h1 style="text-align: center;">{% block heading %}{% endblock %}</h1>
+        <h1 style="text-align: center; color: white;">{% block heading %}{% endblock %}</h1>
         {% block body %}
         {% endblock %}
     </body>
