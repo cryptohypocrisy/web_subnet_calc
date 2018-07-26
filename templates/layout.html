@@ -21,15 +21,14 @@
                 animation-name: fadein;
                 animation-duration: 1s;
             }
-            @keyframes buttonhover {
-                to {background-color: lightgreen}
+            #calculatebutton {
+                border-color: rgb(30, 111, 178);
             }
             #calculatebutton:hover {
-                animation-name: buttonhover;
-                animation-duration: 2s;
-            }
-            .variable {
-                color: black;
+                transition-property: color, background-color;
+                transition-duration: 0.5s;
+                background-color: grey;
+                color: white;
             }
         </style>
 <!--

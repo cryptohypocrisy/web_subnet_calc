@@ -8,19 +8,19 @@
         {% if network.ip and network.mask or network.ip == [] %}
             <div class="form-group">
                 <input class="form-control" style="margin-bottom: 5px;" type="text" name="ip" placeholder="IP Address">
-                <input class="form-control" type="text" name="mask" placeholder="CIDR or Mask">
+                <input class="form-control" style="margin-bottom: 5px;" type="text" name="mask" placeholder="CIDR or Mask">
         {% elif network.ip == False and network.mask %}
             <input class="form-control" style="margin-bottom: 5px; background-color: pink;"; type="text" name="ip" placeholder="Invalid IP!">
-            <input class="form-control" type="text" name="mask" value="{{ ".".join(network.mask) }}">
+            <input class="form-control" style="margin-bottom: 5px;" type="text" name="mask" value="{{ ".".join(network.mask) }}">
         {% elif network.mask == False and network.ip %}
             <input class="form-control" style="margin-bottom: 5px;" type="text" name="ip" value="{{ ".".join(network.ip) }}">
-            <input class="form-control" type="text" name="mask" placeholder="Invalid Mask!" style="background-color: pink">
+            <input class="form-control" style="margin-bottom: 5px; background-color: pink;" type="text" name="mask" placeholder="Invalid Mask!">
         {% else %}
             <input class="form-control" style="margin-bottom: 5px; background-color: pink;"; type="text" name="ip" placeholder="Invalid IP!">
-            <input class="form-control" type="text" name="mask" placeholder="Invalid Mask!" style="background-color: pink">
+            <input class="form-control" style="margin-bottom: 5px; background-color: pink;" type="text" name="mask" placeholder="Invalid Mask!">
         {% endif %}
 
-        <button class="form-control" id="calculatebutton" style="margin-top: 5px;">Calculate!</button>
+        <button class="form-control" id="calculatebutton" style="margin-top: 5px; width: 25%; margin: auto;">Calculate!</button>
             </div>
 
 
@@ -29,32 +29,32 @@
             {% if network.ip and network.mask %}
                 <table>
                     <tr>
-                        <td style="position: 150px; width:400px">IP Address:</td>
+                        <td style="width:100%">IP Address:</td>
                         <td style="text-align: right;">{{ ".".join(network.ip) }}</td>
                     </tr>
                     <tr>
-                        <td style="position: 150px; width:400px">Mask:</td>
+                        <td style="width:100%">Mask:</td>
                         <td style="text-align: right;">{{ ".".join(network.mask) }}</td>
                     </tr>
                     <tr>
-                        <td style="position: 150px; width:400px">Wildcard:</td>
+                        <td style="width:100%">Wildcard:</td>
                         <td style="text-align: right;">{{ ".".join(network.get_wildcard()) }}</td>
                     </tr>
                     <tr>
-                        <td style="position: 150px; width:400px">Network:</td>
-                        <td style="text-align: right;">{{ ".".join(network.get_network_address()) }}</td>
+                        <td style="width:100%">Network:</td>
+                        <td style="text-align: right;">{{ ".".join(network.get_network_address()) }}/{{ network.cidr }}</td>
                     </tr>
                     <tr>
-                        <td style="position: 150px; width:400px">Broadcast:</td>
+                        <td style="width:100%">Broadcast:</td>
                         <td style="text-align: right;">{{ ".".join(network.get_broadcast_address()) }}</td>
                     </tr>
                     <tr>
-                        <td style="position: 150px; width:400px">Class:</td>
+                        <td style="width:100%">Class:</td>
                         <td style="text-align: right;">{{ network.get_net_class() }}</td>
                     </tr>
                     <tr>
-                        <td style="position: 150px; width:400px">Hosts per Network:</td>
-                        <td style="text-align: right;">{{ network.get_num_networks_hosts()[1] }}</td>
+                        <td style="width:100%">Hosts per Network:</td>
+                        <td style="text-align: right;">{{ "{:,}".format(network.get_num_networks_hosts()[1]) }}</td>
                     </tr>
                 </table>
             {% endif %}
