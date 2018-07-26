@@ -20,7 +20,7 @@
             <input class="form-control" type="text" name="mask" placeholder="Invalid Mask!" style="background-color: pink">
         {% endif %}
 
-        <button class="form-control" style="margin-top: 5px;">Calculate!</button>
+        <button class="form-control" id="calculatebutton" style="margin-top: 5px;">Calculate!</button>
             </div>
 
 
@@ -29,20 +29,35 @@
             {% if network.ip and network.mask %}
                 <table>
                     <tr>
-                        <td style="position: 200px; width:400px">IP Address:</td>
-                        <td>{{ ".".join(network.ip)}}</td>
+                        <td style="position: 150px; width:400px">IP Address:</td>
+                        <td style="text-align: right;">{{ ".".join(network.ip) }}</td>
+                    </tr>
+                    <tr>
+                        <td style="position: 150px; width:400px">Mask:</td>
+                        <td style="text-align: right;">{{ ".".join(network.mask) }}</td>
+                    </tr>
+                    <tr>
+                        <td style="position: 150px; width:400px">Wildcard:</td>
+                        <td style="text-align: right;">{{ ".".join(network.get_wildcard()) }}</td>
+                    </tr>
+                    <tr>
+                        <td style="position: 150px; width:400px">Network:</td>
+                        <td style="text-align: right;">{{ ".".join(network.get_network_address()) }}</td>
+                    </tr>
+                    <tr>
+                        <td style="position: 150px; width:400px">Broadcast:</td>
+                        <td style="text-align: right;">{{ ".".join(network.get_broadcast_address()) }}</td>
+                    </tr>
+                    <tr>
+                        <td style="position: 150px; width:400px">Class:</td>
+                        <td style="text-align: right;">{{ network.get_net_class() }}</td>
+                    </tr>
+                    <tr>
+                        <td style="position: 150px; width:400px">Hosts per Network:</td>
+                        <td style="text-align: right;">{{ network.get_num_networks_hosts()[1] }}</td>
                     </tr>
                 </table>
-                IP Address: {{ ".".join(network.ip) }}
-                <br>Subnet Mask: <span class="variable">{{ ".".join(network.mask) }}</span>
-                <br>Wildcard: <span class="variable">{{ ".".join(network.get_wildcard()) }}</span>
             {% endif %}
-            <table>
-                <tr>
-                    <td style="padding-right: 150px;">test1</td>
-                    <td>test2</td>
-                </tr>
-            </table>
         </div>
     </div>
 {% endblock %}
